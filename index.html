@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sayem Hossain Bhuiyan — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #eef1f4;
+    --bg-panel: #e4e9ee;
+    --paper: #f7f9fb;
+    --ink: #15212c;
+    --ink-soft: #4a5763;
+    --line: rgba(21,33,44,0.12);
+    --line-soft: rgba(21,33,44,0.06);
+    --amber: #e0793a;
+    --amber-dim: #f0c19e;
+    --teal: #2e6b73;
+    --teal-dim: #cfe1e2;
+    --max: 1040px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 44px 44px;
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(238,241,244,0.86);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--max); margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-brand{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px; letter-spacing:0.06em;
+    color:var(--ink-soft);
+  }
+  .nav-brand strong{color:var(--ink); font-weight:600;}
+  nav.links{display:flex; gap:28px;}
+  nav.links a{
+    font-size:14px; text-decoration:none; color:var(--ink-soft);
+    font-weight:500; position:relative; padding:2px 0;
+  }
+  nav.links a:hover, nav.links a:focus-visible{color:var(--ink);}
+  nav.links a::after{
+    content:''; position:absolute; left:0; bottom:-3px; width:0; height:1px;
+    background:var(--amber); transition:width .25s ease;
+  }
+  nav.links a:hover::after{width:100%;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    max-width:var(--max); margin:0 auto; padding:64px 28px 40px;
+    display:grid; grid-template-columns:1.1fr 1fr; gap:40px; align-items:center;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace; font-size:12.5px;
+    color:var(--teal); letter-spacing:0.08em; text-transform:uppercase;
+    display:flex; align-items:center; gap:10px; margin-bottom:18px;
+  }
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--teal);}
+  h1.title{
+    font-family:'Fraunces', serif; font-weight:600;
+    font-size:clamp(2.4rem, 5vw, 3.6rem);
+    line-height:1.04; margin:0 0 18px; letter-spacing:-0.01em;
+  }
+  .hero p.lede{
+    font-size:1.08rem; color:var(--ink-soft); max-width:46ch; margin:0 0 28px;
+  }
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:'Inter'; font-weight:600; font-size:14px;
+    padding:12px 22px; border-radius:3px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn-primary{background:var(--ink); color:var(--paper);}
+  .btn-primary:hover{transform:translateY(-1px); box-shadow:0 6px 16px rgba(21,33,44,0.22);}
+  .btn-ghost{border:1px solid var(--line); color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--ink); transform:translateY(-1px);}
+  .btn:focus-visible{outline:2px solid var(--teal); outline-offset:2px;}
+
+  /* trajectory diagram */
+  .traj-panel{
+    background:var(--paper); border:1px solid var(--line); border-radius:6px;
+    padding:22px 20px 16px; position:relative;
+  }
+  .traj-caption{
+    display:flex; justify-content:space-between; font-family:'JetBrains Mono', monospace;
+    font-size:11px; color:var(--ink-soft); margin-bottom:6px;
+  }
+  .traj-caption span:last-child{color:var(--amber);}
+  #trajSvg{width:100%; height:auto; display:block;}
+  .traj-eq{
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; color:var(--ink-soft);
+    text-align:center; margin-top:6px; letter-spacing:0.02em;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    #trajDot, #trajPath{animation:none !important;}
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:64px 0;}
+  .section-head{
+    display:flex; align-items:baseline; gap:16px; margin-bottom:34px;
+    border-bottom:1px solid var(--line); padding-bottom:14px;
+  }
+  .section-num{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--amber);}
+  h2.section-title{
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.7rem; margin:0;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:start;}
+  .about-grid p{color:var(--ink-soft); margin:0 0 16px;}
+  .about-grid p:first-child{color:var(--ink);}
+  .fact-list{list-style:none; margin:0; padding:0; display:grid; gap:12px;}
+  .fact-list li{
+    display:flex; justify-content:space-between; font-size:14px;
+    border-bottom:1px dashed var(--line); padding-bottom:10px;
+  }
+  .fact-list span:first-child{font-family:'JetBrains Mono', monospace; color:var(--ink-soft); font-size:12.5px;}
+  .fact-list span:last-child{font-weight:600;}
+
+  /* ---------- EDUCATION TIMELINE ---------- */
+  .timeline{position:relative; padding-left:28px;}
+  .timeline::before{
+    content:''; position:absolute; left:5px; top:6px; bottom:6px; width:1px;
+    background:var(--line);
+  }
+  .tl-item{position:relative; padding-bottom:34px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:''; position:absolute; left:-28px; top:4px; width:11px; height:11px;
+    border-radius:50%; background:var(--paper); border:2px solid var(--teal);
+  }
+  .tl-year{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--teal); margin-bottom:4px;}
+  .tl-school{font-weight:600; font-size:1.02rem; margin-bottom:2px;}
+  .tl-detail{color:var(--ink-soft); font-size:14px;}
+  .tl-gpa{
+    display:inline-block; margin-top:8px; font-family:'JetBrains Mono', monospace;
+    font-size:12px; background:var(--teal-dim); color:var(--teal); padding:3px 10px; border-radius:3px;
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  .skill-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:6px;
+    padding:18px 18px 16px;
+  }
+  .skill-card .sk-label{
+    display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px;
+  }
+  .skill-card .sk-name{font-weight:600; font-size:15px;}
+  .skill-card .sk-tag{font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--ink-soft);}
+  .bar-track{height:5px; background:var(--line-soft); border-radius:3px; overflow:hidden;}
+  .bar-fill{height:100%; background:var(--amber); border-radius:3px;}
+  .skill-card.core .bar-fill{background:var(--teal);}
+
+  /* ---------- PROJECTS ---------- */
+  .project-feature{
+    display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center;
+    background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:32px;
+    margin-bottom:22px;
+  }
+  .proj-tag{
+    font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--amber);
+    text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px; display:block;
+  }
+  .project-feature h3{font-family:'Fraunces', serif; font-size:1.5rem; margin:0 0 10px; font-weight:600;}
+  .project-feature p{color:var(--ink-soft); margin:0 0 16px;}
+  .chip-row{display:flex; gap:8px; flex-wrap:wrap;}
+  .chip{
+    font-family:'JetBrains Mono', monospace; font-size:11px; padding:4px 10px;
+    border:1px solid var(--line); border-radius:3px; color:var(--ink-soft);
+  }
+  .proj-visual{
+    aspect-ratio:4/3; border-radius:6px; background:var(--bg-panel);
+    display:flex; align-items:center; justify-content:center; overflow:hidden;
+    border:1px solid var(--line);
+  }
+
+  .projects-more{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-top:20px;
+  }
+  .more-card{
+    border:1px dashed var(--line); border-radius:6px; padding:18px;
+    color:var(--ink-soft); font-size:13.5px;
+  }
+  .more-card .mono{font-size:11px; color:var(--amber); display:block; margin-bottom:6px;}
+
+  /* ---------- CONTACT ---------- */
+  .contact-panel{
+    background:var(--ink); color:var(--paper); border-radius:8px;
+    padding:44px; display:grid; grid-template-columns:1.2fr 1fr; gap:30px; align-items:center;
+  }
+  .contact-panel h2{font-family:'Fraunces', serif; font-size:1.8rem; margin:0 0 12px; font-weight:600;}
+  .contact-panel p{color:rgba(247,249,251,0.72); margin:0; max-width:40ch;}
+  .contact-email{
+    font-family:'JetBrains Mono', monospace; font-size:1.05rem; color:var(--amber-dim);
+    text-decoration:none; word-break:break-all;
+  }
+  .contact-email:hover{text-decoration:underline;}
+  .contact-links{display:flex; flex-direction:column; gap:14px; align-items:flex-start;}
+  .contact-row{font-family:'JetBrains Mono', monospace; font-size:12.5px; color:rgba(247,249,251,0.6); display:flex; gap:10px;}
+
+  footer{
+    text-align:center; padding:28px; font-family:'JetBrains Mono', monospace;
+    font-size:11.5px; color:var(--ink-soft);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 860px){
+    .hero{grid-template-columns:1fr; padding-top:44px;}
+    .about-grid{grid-template-columns:1fr; gap:28px;}
+    .skills-grid{grid-template-columns:repeat(2,1fr);}
+    .project-feature{grid-template-columns:1fr;}
+    .projects-more{grid-template-columns:1fr;}
+    .contact-panel{grid-template-columns:1fr; padding:30px;}
+    nav.links{gap:16px;}
+    nav.links a{font-size:12.5px;}
+  }
+  @media (max-width: 480px){
+    .skills-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand"><strong>SAYEM</strong> / HOSSAIN BHUIYAN</div>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="eyebrow">Aspiring Aerospace Engineer</div>
+    <h1 class="title">Sayem Hossain<br>Bhuiyan</h1>
+    <p class="lede">Science student from Feni, Bangladesh, building a foundation in math, physics, and code — one simulation at a time, with sights set on aerospace engineering in Europe.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">View projects</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+    </div>
+  </div>
+
+  <div class="traj-panel">
+    <div class="traj-caption">
+      <span>FIG. 1 — PROJECTILE MOTION</span>
+      <span>θ = 42°, v₀ = 24 m/s</span>
+    </div>
+    <svg id="trajSvg" viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+      <!-- axes -->
+      <line x1="30" y1="220" x2="400" y2="220" stroke="var(--line)" stroke-width="1"/>
+      <line x1="30" y1="220" x2="30" y2="20" stroke="var(--line)" stroke-width="1"/>
+      <!-- ticks -->
+      <g stroke="var(--line)" stroke-width="1">
+        <line x1="100" y1="216" x2="100" y2="224"/>
+        <line x1="170" y1="216" x2="170" y2="224"/>
+        <line x1="240" y1="216" x2="240" y2="224"/>
+        <line x1="310" y1="216" x2="310" y2="224"/>
+        <line x1="380" y1="216" x2="380" y2="224"/>
+      </g>
+      <!-- launch angle guide -->
+      <line x1="30" y1="220" x2="90" y2="160" stroke="var(--teal)" stroke-width="1" stroke-dasharray="3 4"/>
+      <path d="M 46 220 A 18 18 0 0 1 55 205" fill="none" stroke="var(--teal)" stroke-width="1"/>
+      <text x="58" y="204" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--teal)">θ</text>
+      <!-- apex dashed guide -->
+      <line x1="215" y1="220" x2="215" y2="62" stroke="var(--line)" stroke-width="1" stroke-dasharray="2 4"/>
+      <circle cx="215" cy="62" r="2.5" fill="var(--ink-soft)"/>
+      <text x="222" y="58" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--ink-soft)">apex</text>
+      <!-- trajectory path -->
+      <path id="trajPath" d="M 30 220 Q 215 -20 400 220" fill="none" stroke="var(--amber)" stroke-width="2.5"/>
+      <!-- moving dot -->
+      <circle id="trajDot" r="5" fill="var(--amber)">
+        <animateMotion dur="2.6s" repeatCount="indefinite" path="M 30 220 Q 215 -20 400 220"/>
+      </circle>
+      <!-- x axis label -->
+      <text x="205" y="244" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--ink-soft)">range (x)</text>
+    </svg>
+    <div class="traj-eq">y(x) = x·tanθ − g·x² / (2·v₀²·cos²θ)</div>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section id="about">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2 class="section-title">About</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>I'm a science-group student currently studying at Feni Govt College, having completed my SSC in 2024 with a GPA of 5 from Feni Govt Pilot High School.</p>
+        <p>Math, physics, and chemistry are where I spend most of my attention — not just for exams, but because I like turning what I learn into something that runs. That's what led me to teach myself Python, HTML, and JavaScript, and to start building small physics simulations of my own.</p>
+        <p>My long-term interest is aerospace engineering, and I'm working toward a scholarship in Europe to pursue it — this site is part of that application.</p>
+      </div>
+      <ul class="fact-list">
+        <li><span>LOCATION</span><span>Feni, Bangladesh</span></li>
+        <li><span>GROUP</span><span>Science</span></li>
+        <li><span>CURRENT</span><span>Feni Govt College</span></li>
+        <li><span>SSC RESULT</span><span>GPA 5.00 (2024)</span></li>
+        <li><span>FOCUS AREA</span><span>Aerospace Engineering</span></li>
+        <li><span>LANGUAGES OF WORK</span><span>Python, HTML, JS</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Education</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">2024 — Present</div>
+        <div class="tl-school">Feni Govt College</div>
+        <div class="tl-detail">Higher Secondary, Science Group</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">Completed 2024</div>
+        <div class="tl-school">Feni Govt Pilot High School</div>
+        <div class="tl-detail">Secondary School Certificate (SSC), Science Group</div>
+        <span class="tl-gpa">GPA 5.00 / 5.00</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Skills</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card core">
+        <div class="sk-label"><span class="sk-name">Physics</span><span class="sk-tag">CORE</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:88%"></div></div>
+      </div>
+      <div class="skill-card core">
+        <div class="sk-label"><span class="sk-name">Mathematics</span><span class="sk-tag">CORE</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:86%"></div></div>
+      </div>
+      <div class="skill-card core">
+        <div class="sk-label"><span class="sk-name">Chemistry</span><span class="sk-tag">CORE</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:80%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="sk-label"><span class="sk-name">Python</span><span class="sk-tag">CODE</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:75%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="sk-label"><span class="sk-name">JavaScript</span><span class="sk-tag">CODE</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:60%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="sk-label"><span class="sk-name">HTML / CSS</span><span class="sk-tag">CODE</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:65%"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Projects</h2>
+    </div>
+
+    <div class="project-feature">
+      <div>
+        <span class="proj-tag">Featured build</span>
+        <h3>Projectile Motion Simulator</h3>
+        <p>A Python physics engine that models projectile motion on Earth, the Moon, or Mars — computing max height, range, and flight time from launch angle and speed. It goes beyond the closed-form equations too: an Euler-integration mode adds air resistance (drag proportional to velocity squared), since drag can't be solved in closed form, and a comparison mode overlays two trajectories — like ideal vs. drag-affected flight — side by side. Results are visualized as animated trajectory, velocity-time, and height-time plots, with simulation data exportable to CSV.</p>
+        <div class="chip-row">
+          <span class="chip">Python</span>
+          <span class="chip">Matplotlib</span>
+          <span class="chip">Numerical integration</span>
+          <span class="chip">Multi-planet gravity</span>
+          <span class="chip">CSV export</span>
+        </div>
+      </div>
+      <div class="proj-visual">
+        <svg viewBox="0 0 200 140" width="70%">
+          <line x1="10" y1="120" x2="190" y2="120" stroke="var(--line)" stroke-width="1"/>
+          <line x1="10" y1="120" x2="10" y2="10" stroke="var(--line)" stroke-width="1"/>
+          <path d="M 10 120 Q 100 10 190 120" fill="none" stroke="var(--amber)" stroke-width="3"/>
+          <path d="M 10 120 Q 100 45 190 120" fill="none" stroke="var(--teal)" stroke-width="2" stroke-dasharray="4 4" opacity="0.7"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="projects-more">
+      <div class="more-card"><span class="mono">IN PROGRESS</span>Additional physics &amp; math simulators — currently building out five to six more, extending the same approach to other mechanics topics.</div>
+      <div class="more-card"><span class="mono">NEXT</span>Exploring orbital mechanics basics as a bridge between classroom physics and aerospace applications.</div>
+      <div class="more-card"><span class="mono">ONGOING</span>Strengthening JavaScript and web fundamentals to build interactive versions of these simulations for the browser.</div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Contact</h2>
+    </div>
+    <div class="contact-panel">
+      <div>
+        <h2>Let's talk.</h2>
+        <p>Open to scholarship opportunities, mentorship, and anyone happy to talk aerospace, physics, or code.</p>
+      </div>
+      <div class="contact-links">
+        <a class="contact-email" href="mailto:sayemhossain084@gmail.com">sayemhossain084@gmail.com</a>
+        <div class="contact-row">FENI, BANGLADESH</div>
+        <div class="contact-row">SCIENCE GROUP · FENI GOVT COLLEGE</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>Sayem Hossain Bhuiyan — Portfolio</footer>
+
+</body>
+</html>
