@@ -206,14 +206,24 @@
     border:1px solid var(--line);
   }
 
-  .projects-more{
-    display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-top:20px;
+  .proj-link{margin-top:18px; padding:9px 16px; font-size:13px;}
+  .project-feature .chip-row + .proj-link{margin-top:20px;}
+
+  .project-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:22px;
   }
-  .more-card{
-    border:1px dashed var(--line); border-radius:6px; padding:18px;
-    color:var(--ink-soft); font-size:13.5px;
+  .project-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:8px;
+    padding:24px; display:flex; flex-direction:column; align-items:flex-start;
   }
-  .more-card .mono{font-size:11px; color:var(--amber); display:block; margin-bottom:6px;}
+  .project-card .proj-visual{
+    width:100%; aspect-ratio:16/10; margin-bottom:20px;
+  }
+  .project-card h3{font-family:'Fraunces', serif; font-size:1.25rem; margin:0 0 10px; font-weight:600; line-height:1.25;}
+  .project-card p{color:var(--ink-soft); margin:0 0 12px; font-size:15px;}
+  .project-card p strong{color:var(--ink);}
+  .project-card .chip-row{margin-top:auto; padding-top:6px;}
+  .project-card .proj-link{margin-top:18px;}
 
   /* ---------- CONTACT ---------- */
   .contact-panel{
@@ -227,6 +237,9 @@
     text-decoration:none; word-break:break-all;
   }
   .contact-email:hover{text-decoration:underline;}
+  .contact-row{flex-wrap:wrap;}
+  .contact-row a{color:var(--amber-dim); text-decoration:none; word-break:break-all;}
+  .contact-row a:hover{text-decoration:underline;}
   .contact-links{display:flex; flex-direction:column; gap:14px; align-items:flex-start;}
   .contact-row{font-family:'JetBrains Mono', monospace; font-size:12.5px; color:rgba(247,249,251,0.6); display:flex; gap:10px;}
 
@@ -241,13 +254,14 @@
     .about-grid{grid-template-columns:1fr; gap:28px;}
     .skills-grid{grid-template-columns:repeat(2,1fr);}
     .project-feature{grid-template-columns:1fr;}
-    .projects-more{grid-template-columns:1fr;}
+    .project-grid{grid-template-columns:1fr;}
     .contact-panel{grid-template-columns:1fr; padding:30px;}
     nav.links{gap:16px;}
     nav.links a{font-size:12.5px;}
   }
   @media (max-width: 480px){
     .skills-grid{grid-template-columns:1fr;}
+    .project-feature, .project-card{padding:22px;}
   }
 </style>
 </head>
@@ -270,7 +284,7 @@
   <div>
     <div class="eyebrow">Aspiring Aerospace Engineer</div>
     <h1 class="title">Sayem Hossain<br>Bhuiyan</h1>
-    <p class="lede">Science student from Feni, Bangladesh, building a foundation in math, physics, and code — one simulation at a time, with sights set on aerospace engineering in Europe.</p>
+    <p class="lede">I'm Sayem, a science student from Bangladesh with a curiosity for technology, mathematics, and physics. I enjoy coding, building things, and exploring how things work. Outside of that, you'll probably find me watching films, following a story.</p>
     <div class="hero-actions">
       <a href="#projects" class="btn btn-primary">View projects</a>
       <a href="#contact" class="btn btn-ghost">Get in touch</a>
@@ -324,9 +338,11 @@
     </div>
     <div class="about-grid">
       <div>
-        <p>I'm a science-group student currently studying at Feni Govt College, having completed my SSC in 2024 with a GPA of 5 from Feni Govt Pilot High School.</p>
-        <p>Math, physics, and chemistry are where I spend most of my attention — not just for exams, but because I like turning what I learn into something that runs. That's what led me to teach myself Python, HTML, and JavaScript, and to start building small physics simulations of my own.</p>
-        <p>My long-term interest is aerospace engineering, and I'm working toward a scholarship in Europe to pursue it — this site is part of that application.</p>
+        <p>I'm someone who's naturally drawn to things that challenge the mind — coding, mathematics, physics, and pretty much anything that demands deep focus, curiosity, and problem-solving.</p>
+        <p>I love building things, breaking them down, figuring out how they work, and occasionally spending hours solving a problem that probably had a simpler solution. Technology isn't just something I use; it's something I genuinely enjoy exploring.</p>
+        <p>Outside the technical world, I'm into cinema, TV shows, and chess — three different ways to appreciate strategy, storytelling, and the occasional existential crisis.</p>
+        <p>And social media? I've had an intense, lifelong hatred for it. Unfortunately, we're still in a toxic relationship.</p>
+        <p><strong>Curious by nature. Technical by interest. A problem-solver by instinct.</strong></p>
       </div>
       <ul class="fact-list">
         <li><span>LOCATION</span><span>Feni, Bangladesh</span></li>
@@ -355,6 +371,10 @@
         <div class="tl-school">Feni Govt Pilot High School</div>
         <div class="tl-detail">Secondary School Certificate (SSC), Science Group</div>
         <span class="tl-gpa">GPA 5.00 / 5.00</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">Class 2–5</div>
+        <div class="tl-school">Brisben Residential School And College</div>
       </div>
     </div>
   </section>
@@ -406,13 +426,14 @@
         <div class="chip-row">
           <span class="chip">Python</span>
           <span class="chip">Matplotlib</span>
-          <span class="chip">Numerical integration</span>
-          <span class="chip">Multi-planet gravity</span>
-          <span class="chip">CSV export</span>
+          <span class="chip">Numerical Integration</span>
+          <span class="chip">Multi-planet Gravity</span>
+          <span class="chip">CSV Export</span>
         </div>
+        <a class="btn btn-ghost proj-link" href="https://github.com/sayemhossainbhuiyan/Projectile-motion-simulator.git" target="_blank" rel="noopener noreferrer" aria-label="View Projectile Motion Simulator on GitHub (opens in a new tab)">View on GitHub ↗</a>
       </div>
       <div class="proj-visual">
-        <svg viewBox="0 0 200 140" width="70%">
+        <svg viewBox="0 0 200 140" width="70%" role="img" aria-label="Diagram comparing an ideal projectile trajectory with a drag-affected one">
           <line x1="10" y1="120" x2="190" y2="120" stroke="var(--line)" stroke-width="1"/>
           <line x1="10" y1="120" x2="10" y2="10" stroke="var(--line)" stroke-width="1"/>
           <path d="M 10 120 Q 100 10 190 120" fill="none" stroke="var(--amber)" stroke-width="3"/>
@@ -421,10 +442,110 @@
       </div>
     </div>
 
-    <div class="projects-more">
-      <div class="more-card"><span class="mono">IN PROGRESS</span>Additional physics &amp; math simulators — currently building out five to six more, extending the same approach to other mechanics topics.</div>
-      <div class="more-card"><span class="mono">NEXT</span>Exploring orbital mechanics basics as a bridge between classroom physics and aerospace applications.</div>
-      <div class="more-card"><span class="mono">ONGOING</span>Strengthening JavaScript and web fundamentals to build interactive versions of these simulations for the browser.</div>
+    <div class="project-grid">
+
+      <article class="project-card">
+        <div class="proj-visual">
+          <svg viewBox="0 0 240 150" width="85%" role="img" aria-label="Diagram of a satellite on an elliptical orbit around Earth">
+            <ellipse cx="120" cy="75" rx="95" ry="42" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-dasharray="4 4" transform="rotate(-18 120 75)"/>
+            <line x1="120" y1="75" x2="154" y2="26" stroke="var(--ink-soft)" stroke-width="1" stroke-dasharray="2 3"/>
+            <circle cx="120" cy="75" r="26" fill="var(--teal-dim)" stroke="var(--teal)" stroke-width="2"/>
+            <path d="M 101 66 Q 112 59 123 65 Q 131 72 125 80 Q 113 83 104 78 Z" fill="var(--teal)" opacity="0.35"/>
+            <g transform="translate(154 26) rotate(-18)">
+              <rect x="-13" y="-2.5" width="8" height="5" fill="var(--teal)"/>
+              <rect x="5" y="-2.5" width="8" height="5" fill="var(--teal)"/>
+              <circle r="4.5" fill="var(--amber)"/>
+            </g>
+            <text x="140" y="56" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--ink-soft)">r</text>
+          </svg>
+        </div>
+        <span class="proj-tag">Project 02</span>
+        <h3>Satellite Orbit Simulation</h3>
+        <p>A real-time, 3D satellite orbit simulator built with Godot 4 and GDScript, combining Newtonian orbital mechanics with an interactive mission-control interface. The project visualizes satellite motion around a procedurally generated Earth, bringing together aerospace physics, mathematical modeling, and 3D graphics.</p>
+        <div class="chip-row">
+          <span class="chip">Godot 4</span>
+          <span class="chip">GDScript</span>
+          <span class="chip">3D Simulation</span>
+          <span class="chip">Orbital Mechanics</span>
+          <span class="chip">Newtonian Physics</span>
+        </div>
+        <a class="btn btn-ghost proj-link" href="https://github.com/sayemhossainbhuiyan/satellite-orbit-simulator.git" target="_blank" rel="noopener noreferrer" aria-label="View Satellite Orbit Simulation on GitHub (opens in a new tab)">View on GitHub ↗</a>
+      </article>
+
+      <article class="project-card">
+        <div class="proj-visual">
+          <svg viewBox="0 0 240 150" width="85%" role="img" aria-label="Diagram of a two-stage rocket and its curved launch trajectory">
+            <line x1="20" y1="132" x2="225" y2="132" stroke="var(--line)" stroke-width="1"/>
+            <path d="M 60 44 C 62 14, 120 8, 215 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-dasharray="5 4"/>
+            <circle cx="215" cy="24" r="3.5" fill="var(--amber)"/>
+            <path d="M 52 108 L 43 124 L 52 120 Z" fill="var(--ink-soft)"/>
+            <path d="M 68 108 L 77 124 L 68 120 Z" fill="var(--ink-soft)"/>
+            <rect x="52" y="86" width="16" height="34" fill="var(--ink)"/>
+            <rect x="54" y="64" width="12" height="22" fill="var(--ink-soft)"/>
+            <path d="M 54 64 L 60 46 L 66 64 Z" fill="var(--teal)"/>
+            <rect x="52" y="94" width="16" height="3" fill="var(--teal)"/>
+            <path d="M 55 120 L 60 134 L 65 120 Z" fill="var(--amber)"/>
+          </svg>
+        </div>
+        <span class="proj-tag">Project 03</span>
+        <h3>Aerospace Rocket Launch Simulator</h3>
+        <p>A 2D rocket launch simulation built with Python and Pygame, designed to demonstrate the physics and engineering processes behind an orbital rocket launch. The simulator features an original two-stage launch vehicle, interactive mission controls, real-time telemetry, and a detailed launch sequence inspired by real-world spaceflight operations.</p>
+        <div class="chip-row">
+          <span class="chip">Python</span>
+          <span class="chip">Pygame</span>
+          <span class="chip">Aerospace Engineering</span>
+          <span class="chip">Rocket Physics</span>
+          <span class="chip">Real-time Simulation</span>
+        </div>
+        <a class="btn btn-ghost proj-link" href="https://github.com/sayemhossainbhuiyan/aerospace-rocket-launch-simulator.git" target="_blank" rel="noopener noreferrer" aria-label="View Aerospace Rocket Launch Simulator on GitHub (opens in a new tab)">View on GitHub ↗</a>
+      </article>
+
+      <article class="project-card">
+        <div class="proj-visual">
+          <svg viewBox="0 0 240 150" width="85%" role="img" aria-label="A playful three-by-three grid of puzzle tiles with a matching row of stars and a few sparkles">
+            <defs>
+              <path id="fm-star" d="M0 -8 Q1.5 -1.5 8 0 Q1.5 1.5 0 8 Q-1.5 1.5 -8 0 Q-1.5 -1.5 0 -8Z"/>
+            </defs>
+            <!-- row 1: a matching set -->
+            <rect x="63" y="18" width="34" height="34" rx="9" fill="var(--teal-dim)" stroke="var(--teal)" stroke-width="1.5"/>
+            <rect x="103" y="18" width="34" height="34" rx="9" fill="var(--teal-dim)" stroke="var(--teal)" stroke-width="1.5"/>
+            <rect x="143" y="18" width="34" height="34" rx="9" fill="var(--teal-dim)" stroke="var(--teal)" stroke-width="1.5"/>
+            <use href="#fm-star" fill="var(--teal)" transform="translate(80 35)"/>
+            <use href="#fm-star" fill="var(--teal)" transform="translate(120 35)"/>
+            <use href="#fm-star" fill="var(--teal)" transform="translate(160 35)"/>
+            <path d="M 80 35 L 160 35" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 6" opacity="0.9"/>
+            <!-- row 2 -->
+            <rect x="63" y="58" width="34" height="34" rx="9" fill="var(--paper)" stroke="var(--line)" stroke-width="1.5"/>
+            <rect x="103" y="58" width="34" height="34" rx="9" fill="var(--paper)" stroke="var(--line)" stroke-width="1.5"/>
+            <rect x="143" y="58" width="34" height="34" rx="9" fill="var(--paper)" stroke="var(--line)" stroke-width="1.5"/>
+            <circle cx="80" cy="75" r="8" fill="var(--amber)"/>
+            <path d="M 120 66 L 129 75 L 120 84 L 111 75 Z" fill="var(--teal)"/>
+            <circle cx="160" cy="75" r="8" fill="var(--amber)"/>
+            <!-- row 3 -->
+            <rect x="63" y="98" width="34" height="34" rx="9" fill="var(--paper)" stroke="var(--line)" stroke-width="1.5"/>
+            <rect x="103" y="98" width="34" height="34" rx="9" fill="var(--paper)" stroke="var(--line)" stroke-width="1.5"/>
+            <rect x="143" y="98" width="34" height="34" rx="9" fill="var(--paper)" stroke="var(--line)" stroke-width="1.5"/>
+            <path d="M 80 107 L 89 115 L 80 123 L 71 115 Z" fill="var(--teal)"/>
+            <circle cx="120" cy="115" r="8" fill="var(--amber)"/>
+            <use href="#fm-star" fill="var(--teal)" transform="translate(160 115)"/>
+            <!-- sparkles -->
+            <use href="#fm-star" fill="var(--amber)" transform="translate(34 40) scale(0.9)"/>
+            <use href="#fm-star" fill="var(--amber)" transform="translate(206 70) scale(0.7)"/>
+            <use href="#fm-star" fill="var(--amber-dim)" transform="translate(36 112) scale(0.6)"/>
+            <use href="#fm-star" fill="var(--amber-dim)" transform="translate(204 126) scale(0.9)"/>
+          </svg>
+        </div>
+        <span class="proj-tag">Project 04</span>
+        <h3>Fairy Match</h3>
+        <p>In a little world woven from magic and wonder, every match tells a story, and every move brings a little spark of joy. Fairy Match is a whimsical escape into a realm of playful puzzles, where curiosity leads the way and the smallest details make all the difference.</p>
+        <p><strong>A little magic. A little logic. A world waiting to be discovered.</strong></p>
+        <div class="chip-row">
+          <span class="chip">Game Development</span>
+          <span class="chip">Puzzle Game</span>
+        </div>
+        <a class="btn btn-ghost proj-link" href="https://github.com/sayemhossainbhuiyan/fairy-match.git" target="_blank" rel="noopener noreferrer" aria-label="View Fairy Match on GitHub (opens in a new tab)">View on GitHub ↗</a>
+      </article>
+
     </div>
   </section>
 
@@ -435,13 +556,13 @@
     </div>
     <div class="contact-panel">
       <div>
-        <h2>Let's talk.</h2>
-        <p>Open to scholarship opportunities, mentorship, and anyone happy to talk aerospace, physics, or code.</p>
+        <h2>Let's exchange ideas.</h2>
+        <p>Whether it's a question about physics, a project worth exploring, a film worth discussing, or simply an interesting conversation, I'd love to hear from you.</p>
       </div>
       <div class="contact-links">
-        <a class="contact-email" href="mailto:sayemhossain084@gmail.com">sayemhossain084@gmail.com</a>
-        <div class="contact-row">FENI, BANGLADESH</div>
-        <div class="contact-row">SCIENCE GROUP · FENI GOVT COLLEGE</div>
+        <div class="contact-row"><span>Email:</span> <a href="mailto:sayemhossain084@gmail.com">sayemhossain084@gmail.com</a></div>
+        <div class="contact-row"><span>Phone &amp; WhatsApp:</span> <a href="tel:01937009417">01937009417</a></div>
+        <div class="contact-row">Feni, Bangladesh</div>
       </div>
     </div>
   </section>
@@ -452,3 +573,4 @@
 
 </body>
 </html>
+
